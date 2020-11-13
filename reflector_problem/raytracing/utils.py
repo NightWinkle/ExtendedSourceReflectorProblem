@@ -2,7 +2,7 @@ import torch
 from math import pi
 
 def normalize_vector(vectors: torch.Tensor) -> torch.Tensor:
-    """This function normalize unit vectors
+    """This function normalizes vectors
 
     Args:
         vectors (torch.Tensor): input vectors to be normalized

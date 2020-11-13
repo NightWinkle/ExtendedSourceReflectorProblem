@@ -1,7 +1,7 @@
 import torch
 
 def specular_reflection(incident_rays: torch.Tensor,
-                       normals: torch.Tensor) -> torch.Tensor:
+                        normals: torch.Tensor) -> torch.Tensor:
     """Compute the specular reflection of incident rays on a reflector of which normals are known where the rays hit.
     Both input tensors must have same number of dimensions. This function supports broadcasting.
 
