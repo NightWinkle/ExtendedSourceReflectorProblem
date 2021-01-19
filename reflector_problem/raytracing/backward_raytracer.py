@@ -15,7 +15,7 @@ class BackwardRaytracer:
                            sinkhorn_result):
         self.source_angular_support.requires_grad_(True)
         potential = interpolate_potentials(sinkhorn_result, self.source_angular_support)
-        potential_gradients = torch.grad.autograd(potential,
+        potential_gradients = torch.autograd.grad(potential,
                                                   self.source_angular_support,
                                                   grad_outputs=torch.ones_like(potential).to(potential.device),
                                                   create_graph=True,
