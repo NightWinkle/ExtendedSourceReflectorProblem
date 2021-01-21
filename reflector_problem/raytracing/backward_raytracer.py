@@ -21,7 +21,7 @@ class BackwardRaytracer:
                                                   create_graph=True,
                                                   retain_graph=True)[0]
 
-        reflectors = compute_reflector(self.source_angular_support, potential)
+        reflectors = compute_reflector(self.source_angular_support, potential).view(1, -1, 2)
 
         incident_rays = reflectors[:, :, None, :] - self.source[None, None, :, :]
         incident_rays = normalize_vector(incident_rays)
