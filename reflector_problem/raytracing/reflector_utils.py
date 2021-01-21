@@ -30,5 +30,5 @@ def compute_reflector_normals(unit_vector_support: torch.Tensor,
     Returns:
         torch.Tensor: reflector normals
     """
-    normals = (unit_vector_support - gradient_to_normal(unit_vector_support)*potential_gradients) * torch.exp(potential)
+    normals = (unit_vector_support - gradient_to_normal(unit_vector_support)*potential_gradients[..., None]) * torch.exp(potential[..., None])
     return normals
