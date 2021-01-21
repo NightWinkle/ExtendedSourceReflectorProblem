@@ -35,5 +35,5 @@ class NaiveRayWeighter(RayWeighter):
         """
         rays_angle = to_angle(rays)
         weights = self.source_description.pdf(rays_angle)
-        return weights / weights.sum(dim=-1)
+        return weights / weights.sum(dim=-1, keepdim=True)
 
