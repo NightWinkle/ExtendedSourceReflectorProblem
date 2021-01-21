@@ -20,7 +20,8 @@ class BackwardRaytracer:
                                                   grad_outputs=torch.ones_like(potential).to(potential.device),
                                                   create_graph=True,
                                                   retain_graph=True)[0]
-
+        potential = potential.view(-1)
+        potential_gradients = potential_gradients.view(-1)
         reflectors = compute_reflector(self.source_angular_support, potential).view(1, -1, 2)
 
         incident_rays = reflectors[:, :, None, :] - self.source[None, None, :, :]
