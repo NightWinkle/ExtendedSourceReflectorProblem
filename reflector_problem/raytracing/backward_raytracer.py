@@ -26,7 +26,7 @@ class BackwardRaytracer:
         incident_rays = reflectors[:, :, None, :] - self.source[None, None, :, :]
         incident_rays = normalize_vector(incident_rays)
 
-        normals = compute_reflector_normals(self.source_angular_support, potential, potential_gradients)
+        normals = compute_reflector_normals(to_unit_vector(self.source_angular_support), potential, potential_gradients)
         normals = normalize_vector(normals)
 
         reflected_rays = specular_reflection(incident_rays, normals)
