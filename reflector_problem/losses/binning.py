@@ -1,5 +1,5 @@
 import torch
-from pykeops import LazyTensor
+from pykeops.torch import LazyTensor
 from reflector_problem.raytracing.utils import to_angle
 from math import pi
 
@@ -9,8 +9,8 @@ class SmoothBinning:
         if n_bins is None and bins_centers is None:
             raise Exception("Either n_bins or bins_centers must be specified")
         elif n_bins is not None:
-            self.delta = 15*np.pi/8 - 9*np.pi/8
-            centers = torch.linspace(9*np.pi/8, 15*np.pi/8, n_bins+1).cuda()
+            self.delta = 15*pi/8 - 9*pi/8
+            centers = torch.linspace(9*pi/8, 15*pi/8, n_bins+1)
             centers = (centers[1:] + centers[:-1])/2
             self.centers = centers
         else:
@@ -20,13 +20,13 @@ class SmoothBinning:
 
     def __call__(self, rays_angles, weights):
         raydiffs = (LazyTensor(rays_angles.view(-1)[:, None, None]) -
-                    LazyTensor(self.centers[None, :, None]).type(rays_angles.dtype).device(rays_angles.device)).abs()
+                    LazyTensor(self.centers[None, :, None].type(rays_angles.dtype).to(rays_angles.device))).abs()
 
         x = (-0.5*(raydiffs/self.sigma)**2).exp() / \
             (self.sigma * (pi*2)**(1/2)) * self.delta
 
         x_weighted = x * LazyTensor(weights.view(-1)
-                                    [:, None, None])
+                                    [:, None, None].type(rays_angles.dtype).to(rays_angles.device))
 
         dist = x_weighted.sum(dim=0)
 
@@ -40,8 +40,8 @@ class Binning:
         if n_bins is None and bins_centers is None:
             raise Exception("Either n_bins or bins_centers must be specified")
         elif n_bins is not None:
-            self.delta = 15*np.pi/8 - 9*np.pi/8
-            centers = torch.linspace(9*np.pi/8, 15*np.pi/8, n_bins+1).cuda()
+            self.delta = 15*pi/8 - 9*pi/8
+            centers = torch.linspace(9*pi/8, 15*pi/8, n_bins+1).cuda()
             centers = (centers[1:] + centers[:-1])/2
             self.centers = centers
         else:
@@ -50,7 +50,7 @@ class Binning:
 
     def __call__(self, rays_angles, weights):
         raydiffs = (LazyTensor(rays_angles.view(-1)[:, None, None]) -
-                    LazyTensor(self.centers[None, :, None]).type(rays_angles.dtype).device(rays_angles.device)).abs()
+                    LazyTensor(self.centers[None, :, None].type(rays_angles.dtype).to(rays_angles.device))).abs()
         rays_bins = raydiffs.argmin(dim=1)
 
         dist = torch.zeros_like(self.centers).scatter_add(
