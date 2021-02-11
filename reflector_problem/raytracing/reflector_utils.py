@@ -13,7 +13,7 @@ def compute_reflector(unit_vector_support: torch.Tensor,
     Returns:
         torch.Tensor: reflector points
     """
-    return unit_vector_support * torch.exp(potential[...,None])
+    return unit_vector_support * torch.exp(potential[..., None])
 
 def compute_reflector_normals(unit_vector_support: torch.Tensor,
                               potential: torch.Tensor,
