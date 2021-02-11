@@ -41,7 +41,7 @@ class Binning:
             raise Exception("Either n_bins or bins_centers must be specified")
         elif n_bins is not None:
             self.delta = 15*pi/8 - 9*pi/8
-            centers = torch.linspace(9*pi/8, 15*pi/8, n_bins+1).cuda()
+            centers = torch.linspace(9*pi/8, 15*pi/8, n_bins+1)
             centers = (centers[1:] + centers[:-1])/2
             self.centers = centers
         else:
