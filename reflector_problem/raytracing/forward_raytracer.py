@@ -115,4 +115,4 @@ class ForwardRaytracer:
         # Computing specular reflection of traced rays
         reflected_rays = specular_reflection(incident_rays, normals)
 
-        return reflected_rays, torch.ones(reflected_rays.shape[:-1])
+        return reflected_rays, torch.ones(reflected_rays.shape[:-1]).to(reflected_rays.device)
