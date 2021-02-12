@@ -34,7 +34,6 @@ class SmoothBinning:
 
         return self.centers, dist
 
-
 class Binning:
     def __init__(self, bins_centers=None, n_bins=None):
         if n_bins is None and bins_centers is None:
@@ -53,7 +52,7 @@ class Binning:
                     LazyTensor(self.centers[None, :, None].type(rays_angles.dtype).to(rays_angles.device))).abs()
         rays_bins = raydiffs.argmin(dim=1)
 
-        dist = torch.zeros_like(self.centers).scatter_add(
+        dist = torch.zeros_like(self.centers).to(rays_angles.device).scatter_add(
             dim=0, index=rays_bins.view(-1), src=weights.view(-1))
 
         dist = dist/dist.sum()
