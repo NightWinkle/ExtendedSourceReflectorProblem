@@ -36,7 +36,7 @@ def design_reflector_golds(
 
         modified_target = modified_target * \
             (extended_source_target /
-             dist.view(*modified_target.shape))**(lr)
+             (dist.view(*modified_target.shape)))**(lr)
 
         modified_target = modified_target/modified_target.sum(dim=-1)
 

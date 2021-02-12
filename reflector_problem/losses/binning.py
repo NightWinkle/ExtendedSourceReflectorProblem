@@ -5,7 +5,8 @@ from math import pi
 
 
 class SmoothBinning:
-    def __init__(self, bins_centers=None, n_bins=None, sigma=0.1):
+    def __init__(self, bins_centers=None, n_bins=None, sigma=0.1, eps=1e-12):
+        self.eps = eps
         if n_bins is None and bins_centers is None:
             raise Exception("Either n_bins or bins_centers must be specified")
         elif n_bins is not None:
@@ -30,12 +31,13 @@ class SmoothBinning:
 
         dist = x_weighted.sum(dim=0)
 
-        dist = dist/dist.sum()
+        dist = dist/dist.sum() + self.eps
 
         return self.centers, dist
 
 class Binning:
-    def __init__(self, bins_centers=None, n_bins=None):
+    def __init__(self, bins_centers=None, n_bins=None, eps=1e-12):
+        self.eps = eps
         if n_bins is None and bins_centers is None:
             raise Exception("Either n_bins or bins_centers must be specified")
         elif n_bins is not None:
@@ -55,6 +57,6 @@ class Binning:
         dist = torch.zeros_like(self.centers).to(rays_angles.device).scatter_add(
             dim=0, index=rays_bins.view(-1), src=weights.view(-1))
 
-        dist = dist/dist.sum()
+        dist = dist/dist.sum() + self.eps
 
         return self.centers, dist
