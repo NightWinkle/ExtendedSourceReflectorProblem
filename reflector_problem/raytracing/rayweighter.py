@@ -67,6 +67,6 @@ class RiemannRayWeighter(RayWeighter):
                                torch.Tensor([pi]).cuda().view(1, 1, 1).repeat(batch_size, 1, source_size)], axis=1)
                     -
                     torch.cat([torch.Tensor([0.]).cuda().view(1, 1, 1).repeat(batch_size, 1, source_size),
-                               separating_semi_angles], axis=1)) / np.pi) * self.source_description.pdf(rays_angle).cuda()
+                               separating_semi_angles], axis=1)) / pi) * self.source_description.pdf(rays_angle).cuda()
 
         return weights / weights.sum()
