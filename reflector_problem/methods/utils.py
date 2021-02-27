@@ -9,11 +9,13 @@ class History(object):
     def __init__(self, variables_to_save, frequency=1):
         self.frequency = frequency
         self.variables_to_save = variables_to_save
+        self.step_numbers = []
         self.step_history = []
         self.var_history = dict()
 
     def save_step(self, step_number, **kwargs):
         if step_number % self.frequency == 0:
+            self.step_numbers.append(step_number)
             self.step_history.append({key: value for key, value in kwargs.items(
             ) if self.variables_to_save is None or key in self.variables_to_save})
 
