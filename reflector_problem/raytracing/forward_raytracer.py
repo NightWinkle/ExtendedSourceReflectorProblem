@@ -84,7 +84,7 @@ class ForwardRaytracer:
         self.n_rays = n_rays
 
     def __str__(self):
-        return f"ForwardRaytracer(reflector_height = {reflector_height}, n_rays={n_rays})"
+        return f"ForwardRaytracer(reflector_height = {self.reflector_height}, n_rays={self.n_rays})"
 
     def raytrace_reflector(self, 
                            sinkhorn_result):

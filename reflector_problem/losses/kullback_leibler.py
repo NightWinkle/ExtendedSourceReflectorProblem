@@ -10,7 +10,7 @@ class KLLoss:
         self.binning = binning
 
     def __str__(self):
-        return f"KLLoss(binning = {binning})"
+        return f"KLLoss(binning = {self.binning})"
 
     def __call__(self,
                  target_measure_vector,

@@ -20,7 +20,7 @@ class SmoothBinning:
         self.sigma = sigma
 
     def __str__(self):
-        return f"SmoothBinning(n_bins = {n_bins}, sigma = {sigma})"
+        return f"SmoothBinning(n_bins = {self.n_bins}, sigma = {self.sigma})"
 
     def __call__(self, rays_angles, weights):
         raydiffs = (LazyTensor(rays_angles.view(-1)[:, None, None]) -
@@ -53,7 +53,7 @@ class Binning:
             self.centers = bins_centers
 
     def __str__(self):
-        return f"Binning(n_bins = {n_bins})"
+        return f"Binning(n_bins = {self.n_bins})"
 
     def __call__(self, rays_angles, weights):
         raydiffs = (LazyTensor(rays_angles.view(-1)[:, None, None]) -
