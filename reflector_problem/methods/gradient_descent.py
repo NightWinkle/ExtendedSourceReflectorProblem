@@ -17,6 +17,7 @@ def design_reflector_gd(
         n_steps=20,
         lr=1.,
         lr_multiplier=1.):
+    history.save_vars(optimization = "gradient_descent")
     history.save_vars(raytracer = str(raytracer))
     history.save_vars(loss = str(loss))
     
@@ -67,14 +68,16 @@ def design_reflector_gd(
         cost.backward()
 
         optim.step()
-        scheduler.step()
 
         history.save_step(i,
                     modified_target=modified_target_log.softmax(dim=1).clone().detach(),
                     modified_angular_support=modified_angular_support.clone().detach(),
                     rays=rays.clone().detach(),
                     weights=weights.clone().detach(),
-                    cost=cost.clone().detach())
+                    cost=cost.clone().detach(),
+                    lr=scheduler.get_lr())
+
+        scheduler.step()
 
 
     return modified_target_log.softmax(dim=-1), modified_angular_support, history

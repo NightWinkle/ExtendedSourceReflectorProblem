@@ -15,6 +15,7 @@ def design_reflector_golds(
         n_steps=20,
         lr=1.,
         lr_multiplier=1.):
+    history.save_vars(optimization = "golds")
     history.save_vars(raytracer = str(raytracer))
     history.save_vars(binning = str(binning))
     
@@ -49,7 +50,8 @@ def design_reflector_golds(
                           modified_target=modified_target.clone().detach(),
                           modified_angular_support=modified_angular_support.clone().detach(),
                           rays=rays.clone().detach(),
-                          weights=weights.clone().detach())
+                          weights=weights.clone().detach(),
+                          lr=lr)
 
         lr = lr * lr_multiplier
 
