@@ -17,6 +17,9 @@ def design_reflector_gd(
         n_steps=20,
         lr=1.,
         lr_multiplier=1.):
+    history.save_vars(raytracer = str(raytracer))
+    history.save_vars(loss = str(loss))
+    
     modified_target = initial_target.clone()
     modified_angular_support = initial_angular_support.clone()
 

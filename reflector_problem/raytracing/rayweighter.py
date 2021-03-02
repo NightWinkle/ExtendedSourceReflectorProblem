@@ -28,6 +28,9 @@ class NaiveRayWeighter(RayWeighter):
     def __init__(self, source_description):
         self.source_description = source_description
 
+    def __str__(self):
+        return "NaiveRayWeighter()"
+
     def compute_weights(self, rays):
         """Computes weights of a family of rays
 
@@ -48,6 +51,9 @@ class RiemannRayWeighter(RayWeighter):
 
     def __init__(self, source_description):
         self.source_description = source_description
+
+    def __str__(self):
+        return "RiemannRayWeighter()"
 
     def compute_weights(self, rays):
         """Computes weights of a family of rays

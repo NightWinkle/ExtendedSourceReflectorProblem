@@ -13,6 +13,9 @@ class BackwardRaytracer:
         self.source_angular_support = source_angular_support
         self.reflector_height = reflector_height
 
+    def __str__(self):
+        return f"BackwardRaytracer(reflector_height = {reflector_height}, ray_weighter = {ray_weighter})"
+
     def raytrace_reflector(self, 
                            sinkhorn_result):
         self.source_angular_support.requires_grad_(True)

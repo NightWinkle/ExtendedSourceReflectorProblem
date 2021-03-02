@@ -8,6 +8,9 @@ class WassersteinLoss:
         self.debias = debias
         self.binning=None
 
+    def __str__(self):
+        return f"WassersteinLoss(blur = {blur}, scaling = {scaling}, p = {p}, binning = {binning})"
+
     def __call__(self,
                  target_measure_vector,
                  target_angular_support,

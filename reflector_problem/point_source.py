@@ -27,7 +27,7 @@ def compute_point_source_reflector(input_measure_vector,
                                    target_measure_vector,
                                    target_angular_support,
                                    debias=True,
-                                   blur=0.001,
+                                   blur=0.00001,
                                    scaling=0.95):
     return geomloss.samples_loss.sinkhorn_multiscale(
         input_measure_vector.view(-1),

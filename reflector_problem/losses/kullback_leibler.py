@@ -9,6 +9,9 @@ class KLLoss:
     def __init__(self, binning):
         self.binning = binning
 
+    def __str__(self):
+        return f"KLLoss(binning = {binning})"
+
     def __call__(self,
                  target_measure_vector,
                  target_angular_support,
@@ -22,6 +25,9 @@ class KLLoss:
 class KLSymLoss:
     def __init__(self, binning):
         self.binning = binning
+
+    def __str__(self):
+        return f"KLSymLoss(binning = {binning})"
 
     def __call__(self,
                  target_measure_vector,

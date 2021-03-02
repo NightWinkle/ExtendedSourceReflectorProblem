@@ -19,6 +19,9 @@ class SmoothBinning:
             self.centers = bins_centers
         self.sigma = sigma
 
+    def __str__(self):
+        return f"SmoothBinning(n_bins = {n_bins}, sigma = {sigma})"
+
     def __call__(self, rays_angles, weights):
         raydiffs = (LazyTensor(rays_angles.view(-1)[:, None, None]) -
                     LazyTensor(self.centers[None, :, None].type(rays_angles.dtype).to(rays_angles.device))).abs()
@@ -48,6 +51,9 @@ class Binning:
         else:
             self.delta = bins_centers.max() - bins_centers.min()
             self.centers = bins_centers
+
+    def __str__(self):
+        return f"Binning(n_bins = {n_bins})"
 
     def __call__(self, rays_angles, weights):
         raydiffs = (LazyTensor(rays_angles.view(-1)[:, None, None]) -

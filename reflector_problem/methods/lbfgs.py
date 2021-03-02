@@ -17,6 +17,9 @@ def design_reflector_lbfgs(
         n_eval_steps=20,
         line_search="strong_wolfe",
         lr=1.):
+    history.save_vars(raytracer = str(raytracer))
+    history.save_vars(loss = str(loss))
+    
     modified_target = initial_target.clone()
     modified_angular_support = initial_angular_support.clone()
 
