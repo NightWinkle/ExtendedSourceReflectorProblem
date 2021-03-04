@@ -14,9 +14,11 @@ class SmoothBinning:
             centers = torch.linspace(9*pi/8, 15*pi/8, n_bins+1)
             centers = (centers[1:] + centers[:-1])/2
             self.centers = centers
+            self.n_bins = n_bins
         else:
             self.delta = bins_centers.max() - bins_centers.min()
             self.centers = bins_centers
+            self.n_bins = self.centers.shape[-1]
         self.sigma = sigma
 
     def __str__(self):
@@ -48,9 +50,11 @@ class Binning:
             centers = torch.linspace(9*pi/8, 15*pi/8, n_bins+1)
             centers = (centers[1:] + centers[:-1])/2
             self.centers = centers
+            self.n_bins = n_bins
         else:
             self.delta = bins_centers.max() - bins_centers.min()
             self.centers = bins_centers
+            self.n_bins = self.centers.shape[-1]
 
     def __str__(self):
         return f"Binning(n_bins = {self.n_bins})"
