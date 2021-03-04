@@ -47,10 +47,10 @@ def design_reflector_golds(
         modified_target = modified_target/modified_target.sum(dim=-1)
 
         history.save_step(i,
-                          modified_target=modified_target.clone().detach(),
-                          modified_angular_support=modified_angular_support.clone().detach(),
-                          rays=rays.clone().detach(),
-                          weights=weights.clone().detach(),
+                          modified_target=modified_target.detach().cpu().clone(),
+                          modified_angular_support=modified_angular_support.detach().cpu().clone(),
+                          rays=rays.detach().cpu().clone(),
+                          weights=weights.detach().cpu().clone(),
                           lr=lr)
 
         lr = lr * lr_multiplier

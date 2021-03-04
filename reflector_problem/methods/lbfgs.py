@@ -74,11 +74,11 @@ def design_reflector_lbfgs(
         # Ensures the steps is not already saved in the history - in the case of evaluations steps for LBFGS
         if not optim.state[optim._params[0]]["n_iter"] in history.step_numbers:
             history.save_step(optim.state[optim._params[0]]["n_iter"],
-                modified_target=modified_target_log.softmax(dim=1).clone().detach(),
-                modified_angular_support=modified_angular_support.clone().detach(),
-                rays=rays.clone().detach(),
-                weights=weights.clone().detach(),
-                cost=cost.clone().detach())
+                modified_target=modified_target_log.softmax(dim=1).detach().cpu().clone(),
+                modified_angular_support=modified_angular_support.detach().cpu().clone(),
+                rays=rays.detach().cpu().clone(),
+                weights=weights.detach().cpu().clone(),
+                cost=cost.detach().cpu().clone())
 
         return cost
 
