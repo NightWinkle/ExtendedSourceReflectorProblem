@@ -62,7 +62,7 @@ def design_reflector_gd(
         rays, weights = raytracer.raytrace_reflector(sinkhorn_result)
 
         cost = loss(weights, to_angle(rays),
-                    extended_source_target, modified_angular_support)
+                    extended_source_target, extended_angular_support)
         cost = cost / cost_normalizer
 
         cost.backward()

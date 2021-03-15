@@ -66,7 +66,7 @@ def design_reflector_lbfgs(
         rays, weights = raytracer.raytrace_reflector(sinkhorn_result)
 
         cost = loss(weights, to_angle(rays),
-                    extended_source_target, modified_angular_support)
+                    extended_source_target, extended_angular_support)
         cost = cost / cost_normalizer
 
         cost.backward()
@@ -78,7 +78,8 @@ def design_reflector_lbfgs(
                 modified_angular_support=modified_angular_support.detach().cpu().clone(),
                 rays=rays.detach().cpu().clone(),
                 weights=weights.detach().cpu().clone(),
-                cost=cost.detach().cpu().clone())
+                cost=cost.detach().cpu().clone(),
+                lr=lr)
 
         return cost
 
