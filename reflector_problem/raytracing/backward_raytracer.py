@@ -50,7 +50,8 @@ class BackwardRaytracer:
 
         potential = interpolate_cubic(spline_coeffs, reflector_points.view(-1), self.source_angular_support.view(-1)) - interpolate_cubic(spline_coeffs, reflector_points.view(-1), torch.Tensor([[pi/2]]).to(self.source_angular_support.device)) + torch.log(torch.Tensor([self.reflector_height])).to(self.source_angular_support.device)
         potential_gradients = interpolate_cubic_derivative(spline_coeffs, reflector_points.view(-1), self.source_angular_support.view(-1))
-
+        potential = potential.view(-1)
+        potential_gradients = potential_gradients.view(-1)
         reflectors = compute_reflector(to_unit_vector(self.source_angular_support.view(-1)), potential).view(1, -1, 2)
 
         incident_rays = reflectors[:, :, None, :] - self.source[None, None, :, :]
